@@ -1,0 +1,64 @@
+<div class="container mt5">
+    <div class="row">
+        <div class="col-g-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="titulo">CATALOGO</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="titulo">AGREGAR AL CATALOGO</h5>
+
+                    <form [formGroup]="form" (ngSubmit)="agregarContenido()">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fa-solid fa-barcode" [class.green-icon]="this.form.get('codigo_producto')?.valid" [class.red-icon]="this.form.get('codigo_producto')?.invalid && this.form.get('codigo_producto')?.touched"></i></span>
+                            <input formControlName="codigo_producto" type="text" maxlength="10" class="form-control" placeholder="codigo_producto">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fa-solid fa-film" [class.green-icon]="this.form.get('nombre')?.valid" [class.red-icon]="this.form.get('nombre')?.invalid && this.form.get('nombre')?.touched"></i></span>
+                            <input formControlName="nombre" type="text" class="form-control" maxlength="50" placeholder="Nombre del contenido">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fa-solid fa-user" [class.green-icon]="this.form.get('autor')?.valid" [class.red-icon]="this.form.get('autor')?.invalid && this.form.get('autor')?.touched"></i></span>
+                            <input formControlName="autor" type="text" class="form-control" maxlength="50" placeholder="Nombre del autor">
+                        </div>
+                        <select formControlName="clase_producto" class="form-select input-group-text">
+                            <option selected value="Pelicula">Pelicula</option>
+                            <option value="Serie">Serie</option>
+                        </select>
+                        <br/>
+                        <div class="d-grid gap-2">
+                            <button [disabled]="this.form.invalid" class="btn btn-successbtn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> Agregar</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="titulo">LISTADO DE CONTENIDO</h5>
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let contenido of listaContenido">
+                                <td>{{contenido.codigo_producto}}</td>
+                                <td>{{contenido.nombre}}</td>
+                                <td>{{contenido.autor}}</td>
+                                <td>{{contenido.clase_producto}}</td>
+                                <td><i (click)="editarContenido(contenido)" class="fa-solid fa-pen-to-square text-info"></i></td>
+                                <td><i (click)="eliminarContenido(contenido)" class="fa-solid fa-trash-can text-danger"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
